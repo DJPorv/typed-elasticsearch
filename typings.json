@@ -1,5 +1,7 @@
 {
   "name": "elasticsearch",
   "main": "elasticsearch.d.ts",
-  "dependencies": {}
+  "dependencies": {
+    "pinkie-promise": "github:typings/typed-pinkie-promise#a3085bbb262672ce9569f797ec6a03de91673441"
+  }
 }

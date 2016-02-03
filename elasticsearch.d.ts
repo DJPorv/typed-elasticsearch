@@ -1,38 +1,40 @@
-declare module elasticsearch {
-    export class Client {
+import Promise = require('pinkie-promise');
+
+declare namespace elasticsearch {
+    export interface Client {
 
         constructor(params: any);
         indices: Indices;
         ping(params: PingParams, callback: (err: any, response: any, status: any) => void): void;
-        ping(params: PingParams): IPromise<any>;
+        ping(params: PingParams): Promise<any>;
         get(params: GetParams, callback: (error: any, response: any) => void): void;
-        get<T>(params: GetParams): IPromise<GetResponse<T>>;
+        get<T>(params: GetParams): Promise<GetResponse<T>>;
         index<T>(params: IndexParams<T>, callback: (error: any, response: any) => void): void;
-        index<T>(params: IndexParams<T>): IPromise<any>;
+        index<T>(params: IndexParams<T>): Promise<any>;
         search(params: SearchParams, callback: (error: any, response: any) => void): void;
-        search(params: SearchParams): IPromise<any>;
+        search(params: SearchParams): Promise<any>;
     }
 
-    export class Indices {
+    export interface Indices {
         delete(params: MultipleIndicesParams, callback: (err: any, response: any, status: any) => void): void;
-        delete(params: MultipleIndicesParams): IPromise<any>;
+        delete(params: MultipleIndicesParams): Promise<any>;
         delete(params: SingleIndexParams, callback: (err: any, response: any, status: any) => void): void;
-        delete(params: SingleIndexParams): IPromise<any>;
+        delete(params: SingleIndexParams): Promise<any>;
         exists(params: SingleIndexExitsParams, callback: (err: any, response: any, status: any) => void): void;
-        exists(params: SingleIndexExitsParams): IPromise<any>;
+        exists(params: SingleIndexExitsParams): Promise<any>;
         create(params: SingleIndexParams, callback: (err: any, response: any, status: any) => void): void;
-        create(params: SingleIndexParams): IPromise<any>;
+        create(params: SingleIndexParams): Promise<any>;
         getAlias(params: GetAliasParams, callback: (err: any, response: any, status: any) => void): void;
-        getAlias(params: GetAliasParams): IPromise<any>;
+        getAlias(params: GetAliasParams): Promise<any>;
         putTemplate(params: IndicesPutTemplateParams, callback: (error: any, response: any) => void): void;
-        putTemplate(params: IndicesPutTemplateParams): IPromise<any>;
+        putTemplate(params: IndicesPutTemplateParams): Promise<any>;
     }
 
-    export class MultipleIndicesParams {
+    export interface MultipleIndicesParams {
         index: string[];
     }
 
-    export class SingleIndexParams {
+    export interface SingleIndexParams {
         index: string;
     }
 
@@ -115,17 +117,15 @@ declare module elasticsearch {
         timeout?: Date | number,
     }
 
-    export class SingleIndexExitsParams extends SingleIndexParams {
+    export interface SingleIndexExitsParams extends SingleIndexParams {
         ignoreUnavailable: boolean;
     }
 
-    export class PingParams {
+    export interface PingParams {
         requestTimeout: number;
         method: string;
         hello: string;
     }
-
-    export interface IPromise<T> {
-        then(resolve: (response: T) => void, reject: (error: any) => void): any;
-    }
 }
+
+export = elasticsearch;

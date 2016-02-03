@@ -1,5 +1,6 @@
 {
   "files": [
-    "elasticsearch.d.ts"
+    "elasticsearch.d.ts",
+    "typings/main.d.ts"
   ]
 }
