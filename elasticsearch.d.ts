@@ -1,4 +1,4 @@
-declare module "elasticsearch" {
+declare module elasticsearch {
     export class Client {
 
         constructor(params: any);
